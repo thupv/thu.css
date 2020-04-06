@@ -1,0 +1,72 @@
+@mixin btn-style($color, $background, $hover-background, $shadow, $border-size) {
+  color: $color;
+  background-color: $background;
+  border-width: $border-size;
+  cursor: pointer;
+
+  &::after {
+    width: 100%;
+    height: 80%;
+
+  }
+
+  &:hover {
+    color: $color;
+    text-decoration: underline;
+    background-color: $hover-background;
+  }
+}
+
+.thu-btn {
+  position: relative;
+  display: inline-block;
+  padding: 0.2em 0.4em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: $border-size;
+  font-family: $oswald-font;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid $base-color;
+  border-width: 1px 0px;
+
+  @include btn-style(
+                  $base-color,
+                  map-get($default-colors, "normal"),
+                  map-get($default-colors, "hover"),
+                  map-get($default-colors, "shadow"),
+                  1px
+  );
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    color: $base-color;
+    cursor: not-allowed;
+    background-color: map-get($disabled-colors, "normal");
+    box-shadow: none;
+    opacity: 0.6;
+  }
+
+  $types: "primary" $background-color map-get($primary-colors, "normal") map-get($primary-colors, "hover") map-get($primary-colors, "shadow") 0,
+  "success" $background-color map-get($success-colors, "normal") map-get($success-colors, "hover") map-get($success-colors, "shadow") 0,
+  "warning" $base-color map-get($warning-colors, "normal") map-get($warning-colors, "hover") map-get($warning-colors, "shadow") 0,
+  "error" $background-color map-get($error-colors, "normal") map-get($error-colors, "hover") map-get($error-colors, "shadow") 0;
+
+  @each $type in $types {
+    &.is-#{nth($type, 1)} {
+      @include btn-style(nth($type, 2), nth($type, 3), nth($type, 4), nth($type, 5), nth($type, 6));
+    }
+  }
+
+  input[type="file"] {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+  }
+}

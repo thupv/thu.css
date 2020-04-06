@@ -1,0 +1,264 @@
+// Text Inputs + Textarea
+$input-height: 2rem !default;
+$textarea-height: 10rem !default;
+$input-border-color: $color-black !default;
+$input-border: 2px solid $input-border-color !default;
+$input-background: #fff !default;
+$input-error-color: $color-red !default;
+$input-success-color: $color-green !default;
+$input-focus-color: $color-grey !default;
+$input-font-size: 16px !default;
+
+$input-margin-bottom: 8px;
+$input-margin: 0 0 $input-margin-bottom 0 !default;
+
+$input-padding-left: 8px;
+$input-padding: 0 0 0 $input-padding-left !default;
+$label-font-size: .8rem !default;
+$input-disabled-color: rgba(0, 0, 0, .42) !default;
+$input-disabled-solid-color: #949494 !default;
+$input-disabled-border: 1px dotted $input-disabled-color !default;
+$input-invalid-border: 1px solid $input-error-color !default;
+$input-icon-size: 2rem;
+$placeholder-text-color: $color-grey !default;
+$gutter-width: 1.5rem !default;
+
+/* Text Inputs + Textarea
+   ========================================================================== */
+
+/* Style Placeholders */
+
+::placeholder {
+  color: $placeholder-text-color;
+}
+
+/* Text inputs */
+
+input:not([type]):not(.browser-default),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.thu-textarea {
+  background-color: transparent;
+  border: $input-border;
+  border-width: 2px 0;
+  border-radius: 0;
+  outline: none;
+  height: $input-height;
+  width: 100%;
+  font-size: $input-font-size;
+  margin: $input-margin;
+  padding: $input-padding;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: box-shadow .3s, border .3s;
+
+  // Disabled input style
+  &:disabled,
+  &[readonly="readonly"] {
+    color: $input-disabled-color;
+    border-bottom: $input-disabled-border;
+  }
+
+  // Disabled label style
+  &:disabled + label,
+  &[readonly="readonly"] + label {
+    color: $input-disabled-color;
+  }
+
+  // Focused input style
+  &:focus:not([readonly]) {
+    border-color: $input-focus-color;
+    background-color: #efeff2;
+  }
+
+  // Focused label style
+  &:focus:not([readonly]) + label {
+    color: $input-focus-color;
+  }
+
+  // Hide helper text on data message
+  &.valid ~ .helper-text[data-success],
+  &:focus.valid ~ .helper-text[data-success],
+  &.invalid ~ .helper-text[data-error],
+  &:focus.invalid ~ .helper-text[data-error] {
+    @extend %hidden-text;
+  }
+
+  // Valid Input Style
+  &.valid,
+  &:focus.valid {
+    @extend %valid-input-style;
+  }
+
+  // Custom Success Message
+  &.valid ~ .helper-text:after,
+  &:focus.valid ~ .helper-text:after {
+    @extend %custom-success-message;
+  }
+
+  &:focus.valid ~ label {
+    color: $input-success-color;
+  }
+
+  // Invalid Input Style
+  &.invalid,
+  &:focus.invalid {
+    @extend %invalid-input-style;
+  }
+
+  // Custom Error message
+  &.invalid ~ .helper-text:after,
+  &:focus.invalid ~ .helper-text:after {
+    @extend %custom-error-message;
+  }
+
+  &:focus.invalid ~ label {
+    color: $input-error-color;
+  }
+
+  // Full width label when using validate for error messages
+  &.validate + label {
+    width: 100%;
+  }
+
+  // Form Message Shared Styles
+  & + label:after {
+    @extend %input-after-style;
+  }
+
+
+  $types: "success" $background-color map-get($success-colors, "normal") map-get($success-colors, "hover") map-get($success-colors, "shadow") 0,
+  "warning" $base-color map-get($warning-colors, "normal") map-get($warning-colors, "hover") map-get($warning-colors, "shadow") 0,
+  "error" $background-color map-get($error-colors, "normal") map-get($error-colors, "hover") map-get($error-colors, "shadow") 0;
+
+  @each $type in $types {
+    &.is-#{nth($type, 1)} {
+      border-color: nth($type, 3);
+      &:focus:not([readonly]) {
+        border-color: nth($type, 3);
+      }
+    }
+  }
+}
+
+
+/* Validation Sass Placeholders */
+%valid-input-style {
+  border-bottom: 1px solid $input-success-color;
+  box-shadow: 0 1px 0 0 $input-success-color;
+}
+
+%invalid-input-style {
+  border-bottom: $input-invalid-border;
+  box-shadow: 0 1px 0 0 $input-error-color;
+}
+
+%hidden-text {
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
+}
+
+%custom-success-message {
+  content: attr(data-success);
+  color: $input-success-color;
+}
+
+%custom-error-message {
+  content: attr(data-error);
+  color: $input-error-color;
+}
+
+%input-after-style {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  opacity: 0;
+  transition: .2s opacity ease-out, .2s color ease-out;
+}
+
+
+// Styling for input field wrapper
+.input-field {
+  // Inline styles
+  &.inline {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+
+    input,
+    .select-dropdown {
+      margin-bottom: 1rem;
+    }
+  }
+
+  // Gutter spacing
+  &.col {
+    label {
+      left: $gutter-width / 2;
+    }
+
+    .prefix ~ label,
+    .prefix ~ .validate ~ label {
+      width: calc(100% - 3rem - #{$gutter-width});
+    }
+  }
+
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  & > label {
+    color: $input-border-color;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1rem;
+    cursor: text;
+    transition: transform .2s ease-out, color .2s ease-out;
+    transform-origin: 0% 100%;
+    text-align: initial;
+    transform: translateY(12px);
+
+    &:not(.label-icon).active {
+      transform: translateY(-14px) scale(.8);
+      transform-origin: 0 0;
+    }
+  }
+
+  // Autofill + date + time inputs
+  & > input[type]:-webkit-autofill:not(.browser-default):not([type="search"]) + label,
+  & > input[type=date]:not(.browser-default) + label,
+  & > input[type=time]:not(.browser-default) + label {
+    transform: translateY(-14px) scale(.8);
+    transform-origin: 0 0;
+  }
+}
+
+/* Textarea */
+
+textarea {
+  width: 100%;
+  height: $textarea-height;
+  background-color: transparent;
+  padding-left: 1em;
+  &.thu-textarea {
+    line-height: normal;
+    overflow-y: hidden; /* prevents scroll bar flash */
+    padding: .8rem; /* prevents text jump on Enter keypress */
+    resize: none;
+    min-height: $textarea-height;
+    box-sizing: border-box;
+  }
+}

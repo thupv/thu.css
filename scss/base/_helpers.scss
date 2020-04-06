@@ -1,0 +1,7 @@
+//CSS helper classes.
+
+.clearfix::after {
+  clear: both;
+  content: '';
+  display: table;
+}

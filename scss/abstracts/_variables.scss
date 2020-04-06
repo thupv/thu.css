@@ -1,0 +1,53 @@
+//Global variables
+
+$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+
+$background-color: $color-white !default;
+$text-color: #222222 !default;
+$brand-color: #E50050 !default;
+$base-color: $color-black !default;
+
+$light-grey: #EDEDED !default;
+$mid-grey: #999999 !default;
+$dark-grey: #444444 !default;
+
+$max-width: 1180px !default;
+
+$default-colors: (
+        normal: $background-color,
+        hover: #e7e7e7,
+        shadow: #adafbc
+) !default;
+$disabled-colors: (
+        normal: #d3d3d3,
+        shadow: #adafbc
+) !default;
+$primary-colors: (
+        normal: #209cee,
+        hover: #108de0,
+        shadow: #006bb3
+) !default;
+$success-colors: (
+        normal: #92cc41,
+        hover: #76c442,
+        shadow: #4aa52e
+) !default;
+$warning-colors: (
+        normal: #f7d51d,
+        hover: #f2c409,
+        shadow: #e59400
+) !default;
+$error-colors: (
+        normal: #e76e55,
+        hover: #ce372b,
+        shadow: #8c2022
+) !default;
+
+$breakpoints: (
+        'small': 320px,
+        'medium': 768px,
+        'large': 1024px,
+) !default;
+
+$border-size: 1px;

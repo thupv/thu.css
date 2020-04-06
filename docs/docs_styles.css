@@ -1,0 +1,25 @@
+.showcase {
+    padding: 16px;
+    border: 1px solid #d3d3d3;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.showcode {
+    padding: 4px;
+    position: absolute;
+    font-size: 12px;
+    bottom: -1px;
+    right: -1px;
+}
+
+.samplecode {
+    position: relative;
+}
+
+.copycode {
+    position: absolute;
+    font-size: 12px;
+    top: 0;
+    right: 0px;
+}

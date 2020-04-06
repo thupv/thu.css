@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <meta name="description" content="thu.css - Thu's pet project css framework"/>
+  <meta name="keywords" content="html5,css,framework,sass,thu"/>
+  <meta name="author" content="© 2020 ThuPV"/>
+  <meta name="theme-color" content="#212529"/>
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" sizes="196x196" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <title>thu.css - Thu's pet project css framework</title>
+
+  <link href="../css/thu.css" rel="stylesheet"/>
+  <link href="docs_styles.css" rel="stylesheet"/>
+  <script src="./lib/vue.min.js"></script>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="thu.css"/>
+  <meta property="og:url" content="https://thupv.github.io/thu.css/"/>
+  <meta property="og:description" content="Thu's pet project css framework"/>
+</head>
+
+<body>
+<div id="thucss">
+  <header :class="{ sticky: scrollPos > 50 }">
+    <div class="thu-container">
+      <div class="nav-brand">
+        <a href="https://thupv.github.io/thu.css/">
+          <h1>thu.css</h1>
+        </a>
+        <p>Thu's pet project css framework</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="thu-container">
+    <main class="main-content">
+      <section class="topic">
+        <h2 id="usage"><a href="#usage">#</a>Components</h2>
+
+        <section class="showcase" v-for="sample in collection" :key="sample">
+          <section class="thu-container with-title">
+            <h3 class="title">{{ sample.title | capitalize }}</h3>
+            <button type="button" class="thu-btn is-primary showcode"
+                    @click="sample.showCode = !sample.showCode">code
+            </button>
+            <div :id="sample.title" class="item" v-html="sample.code">
+            </div>
+            <p v-if="sample.description" class="description thu-text">{{ sample.description }}</p>
+            <p v-if="sample.note" class="note thu-text is-error">{{ sample.note }}</p>
+          </section>
+          <section class="samplecode" v-show="sample.showCode">
+            <button type="button" class="thu-btn copycode" @click="copy($event, sample.title)">copy</button>
+            <pre><code class="html">{{ sample.code }}</code></pre>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <span>&copy;2020</span>
+        <a href="https://thupv.github.io" target="_blank" rel="noopener">thupv</a>
+      </p>
+    </footer>
+
+    <!-- Copied balloon -->
+    <div class="thu-balloon from-right copied-balloon" :style="copiedBalloon">
+      <p>copied!!</p>
+    </div>
+  </div>
+</div>
+</body>
+<script src="./script.js"></script>
+</html>

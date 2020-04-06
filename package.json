@@ -1,0 +1,29 @@
+{
+  "name": "thu.css",
+  "description": "thu.css - Thu's pet project css framework",
+  "scripts": {
+    "watch": "npm run build:sass -- --watch",
+    "build:sass": "node-sass --output-style expanded --source-map true scss/thu.scss css/thu.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thupv/thu.css.git"
+  },
+  "keywords": [
+    "css",
+    "scss",
+    "framework"
+  ],
+  "engines": {
+    "node": ">=10.0.0 <13.0.0"
+  },
+  "author": "ThuPV (https://github.com/thupv)",
+  "license": "MIT",
+  "devDependencies": {},
+  "browserslist": [
+    "> 1%"
+  ],
+  "dependencies": {
+    "node-sass": "^4.13.1"
+  }
+}
